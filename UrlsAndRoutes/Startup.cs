@@ -35,6 +35,7 @@ namespace UrlsAndRoutes
                 //2                 /Customer/List                          controller = Customer action = List 
                 //3                 /Customer/List/All                      controller = Customer action = List id = All 
                 //4                 /Customer/List/All/Delete               No match—too many segments
+                //app.UseMvcWithDefaultRoute(); doing the same as bellow
                 routes.MapRoute( name: "MyRoute", 
                     template: "{controller=Home}/{action=Index}/{id?}" );
             } );
