@@ -7,17 +7,15 @@ using UrlsAndRoutes.Models;
 
 namespace UrlsAndRoutes.Controllers
 {
+    [Route("app/[controller]/actions/[action]/{id:weekday?}")]
+    // Route                                        Description
+    // app/customer/actions/index                   This URL targets the Index action method.
+    // app/customer/actions/index/myid              This URL targets the Index action method with the optional id segment set to myid. 
+    // app/customer/actions/list                    This URL targets the List action method. 
+    // app/customer/actions/list/myid               This URL targets the List action method with the optional id segment set to myid.
+
     public class CustomerController : Controller
     {
-        [Route("[controller]/MyAction")]
-        // Route                Description
-        // /Customer/List       This URL targets the List action method. 
-        // /Customer/MyAction   This URL targets the Index action method.
-
-        //[Route( "myroute" )]
-        //// Route                Description
-        //// /Customer/List       This URL targets the List action method, relying on the default route in the Startup.cs file. 
-        //// /myroute             This URL targets the Index action method.
         public ViewResult Index( ) => View( "Result", new Result
         {
             Controller = nameof( CustomerController ),
