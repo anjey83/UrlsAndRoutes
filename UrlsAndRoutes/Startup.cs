@@ -29,14 +29,7 @@ namespace UrlsAndRoutes
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
-            app.UseMvc( 
-                routes => 
-                {
-                    //This route will match a URL only if the id segment is absent (such as /Customer/List) 
-                    //or if it matches one of the days of the week defined in the constraint class (such as /Customer/List/Fri).
-                    routes.MapRoute( name: "MyRoute",
-                        template: "{controller=Home}/{action=Index}/{id:weekday?}" );
-                } );
+            app.UseMvcWithDefaultRoute();
         }
     }
 }

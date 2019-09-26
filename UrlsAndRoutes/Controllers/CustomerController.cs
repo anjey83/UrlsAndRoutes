@@ -9,6 +9,15 @@ namespace UrlsAndRoutes.Controllers
 {
     public class CustomerController : Controller
     {
+        [Route("[controller]/MyAction")]
+        // Route                Description
+        // /Customer/List       This URL targets the List action method. 
+        // /Customer/MyAction   This URL targets the Index action method.
+
+        //[Route( "myroute" )]
+        //// Route                Description
+        //// /Customer/List       This URL targets the List action method, relying on the default route in the Startup.cs file. 
+        //// /myroute             This URL targets the Index action method.
         public ViewResult Index( ) => View( "Result", new Result
         {
             Controller = nameof( CustomerController ),
