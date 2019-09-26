@@ -18,6 +18,8 @@ namespace UrlsAndRoutes
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices( IServiceCollection services )
         {
+            services.Configure<RouteOptions>( options =>
+                 options.ConstraintMap.Add( "weekday", typeof( WeekDayConstraint ) ) );
             services.AddMvc();
         }
 
@@ -32,10 +34,8 @@ namespace UrlsAndRoutes
                 {
                     //This route will match a URL only if the id segment is absent (such as /Customer/List) 
                     //or if it matches one of the days of the week defined in the constraint class (such as /Customer/List/Fri).
-                    routes.MapRoute( name: "MyRoute", 
-                        template: "{controller}/{action}/{id?}", 
-                        defaults: new { controller = "Home", action = "Index" }, 
-                        constraints: new { id = new WeekDayConstraint() } );
+                    routes.MapRoute( name: "MyRoute",
+                        template: "{controller=Home}/{action=Index}/{id:weekday?}" );
                 } );
         }
     }
