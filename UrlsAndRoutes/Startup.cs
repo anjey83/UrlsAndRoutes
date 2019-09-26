@@ -26,7 +26,9 @@ namespace UrlsAndRoutes
             app.UseStaticFiles();
             app.UseMvc(routes =>
             {
-                routes.MapRoute( name: "default", template: "{controller}/{action}" );
+                routes.MapRoute( name: "default",
+                                 template: "{controller}/{action}",
+                                 defaults: new { action = "Index" } /*default value for action segment, the route match single-segment URLs*/  );
             } );
         }
     }
