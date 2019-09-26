@@ -27,21 +27,9 @@ namespace UrlsAndRoutes
             app.UseStaticFiles();
             app.UseMvc(routes =>
             {
-                //simple constraint that limits the URLs that a route will match
-                //The int constraint only allows the URL pattern to match segments whose value can be parsed to an integer value
-                //example of work
-                // Example URL                          Maps To
-                // /                                    controller = Home  action = Index  id = null 
-                // /Home/CustomVariable/Hello           No match—id segment cannot be parsed to an int value. 
-                // /Home/CustomVariable/1               controller = Home  action = CustomVariable  id = 1 
-                // /Home/CustomVariable/1/2             No match—too many segments
-
-                //specify constraints outside the URL pattern, this technique is useful if you prefer to keep the URL pattern separate from its constraints
-                //or for old MVC route defined style
+                //segment to limit the range of URLs that it will match
                 routes.MapRoute( name: "MyRoute", 
-                    template: "{controller}/{action}/{id?}",
-                    defaults: new { controller = "Home", action = "Index" },
-                    constraints: new { id= new IntRouteConstraint() } );
+                    template: "{controller:regex(^H.*)=Home}/{action:regex(^Index$|^About$)=Index}/{id?}" );
             } );
         }
     }
