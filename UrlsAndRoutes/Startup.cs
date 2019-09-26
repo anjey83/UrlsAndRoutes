@@ -26,6 +26,11 @@ namespace UrlsAndRoutes
             app.UseStaticFiles();
             app.UseMvc(routes =>
             {
+                //before used controller Shop, which has now been replaced by the Home controller
+                routes.MapRoute( name:"ShopSchema",
+                                 template:"Shop/{action}",
+                                 defaults: new { controller = "Home" } );
+
                 //mixed segments static and variable
                 //matches any two-segment URL where the first letter starts with 'X'
                 routes.MapRoute("", "X{controller}/{action}");
