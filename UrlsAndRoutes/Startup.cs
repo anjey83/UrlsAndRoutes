@@ -27,9 +27,9 @@ namespace UrlsAndRoutes
             app.UseStaticFiles();
             app.UseMvc(routes =>
             {
-                //segment to limit the range of URLs that it will match
+                // range constraint, which restricts a route so that it matches URLs only when a segment value can be converted to an int and falls between specified values
                 routes.MapRoute( name: "MyRoute", 
-                    template: "{controller:regex(^H.*)=Home}/{action:regex(^Index$|^About$)=Index}/{id?}" );
+                    template: "{controller=Home}/{action=Index}/{id:range(10,20)?}" );
             } );
         }
     }
