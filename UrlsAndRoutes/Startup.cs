@@ -26,18 +26,19 @@ namespace UrlsAndRoutes
             app.UseStaticFiles();
             app.UseMvc(routes =>
             {
-                //defines the standard controller and action variables and custom variable 'id'
-                //if there is not third segment the def value will be used
+                //this route will now match any URL, irrespective og the number of segments it contains or the value of any of those segments
+                //if URL contains additional segments, they are all assigned to the catchall variable
                 //example of work
-                //Segments          Example URL                             Maps To
-                //0                 /                                       controller = Home action = Index 
-                //1                 /Customer                               controller = Customer action = Index 
-                //2                 /Customer/List                          controller = Customer action = List 
-                //3                 /Customer/List/All                      controller = Customer action = List id = All 
-                //4                 /Customer/List/All/Delete               No match—too many segments
-                //app.UseMvcWithDefaultRoute(); doing the same as bellow
+
+                //Segments              Example URL                         Maps To
+                //0                     /                                   controller = Home action = Index 
+                //1                     /Customer                           controller = Customer action = Index 
+                //2                     /Customer/List                      controller = Customer action = List 
+                //3                     /Customer/List/All                  controller = Customer action = List id = All 
+                //4                     /Customer/List/All/Delete           controller = Customer action = List id = All catchall = Delete 
+                //5                     /Customer/List/All/Delete/Perm      controller = Customer action = List id = All catchall = Delete/Perm
                 routes.MapRoute( name: "MyRoute", 
-                    template: "{controller=Home}/{action=Index}/{id?}" );
+                    template: "{controller=Home}/{action=Index}/{id?}/{*catchall}" );
             } );
         }
     }
