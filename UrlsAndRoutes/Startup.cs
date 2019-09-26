@@ -26,6 +26,12 @@ namespace UrlsAndRoutes
             app.UseStaticFiles();
             app.UseMvc(routes =>
             {
+                //create alias for action method that have been no longer present in controller
+                routes.MapRoute( name: "ShopSchema2",
+                                 template: "Shop/OldAction",
+                                 defaults: new { controller = "Home", action = "Index" } );
+
+
                 //before used controller Shop, which has now been replaced by the Home controller
                 routes.MapRoute( name:"ShopSchema",
                                  template:"Shop/{action}",
