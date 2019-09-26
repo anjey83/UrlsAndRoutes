@@ -26,6 +26,10 @@ namespace UrlsAndRoutes
             app.UseStaticFiles();
             app.UseMvc(routes =>
             {
+                //mixed segments static and variable
+                //matches any two-segment URL where the first letter starts with 'X'
+                routes.MapRoute("", "X{controller}/{action}");
+
                 routes.MapRoute( name: "default",
                                  template: "{controller=Home}/{action=Index}" ); //provides both pattern and default behaviour without any segment
                 //By providing def vals for both the conntroller and action, the route will match urls that have zero, one or two segments
@@ -33,6 +37,12 @@ namespace UrlsAndRoutes
                 // /Customer        controller=Customer     action=Index
                 // /Customer/List   controller=Customer     action=List
                 // /Customer/List/All No match—too many segments
+
+                //http://domain.com.Public/Home/Index app need to match url that are prefixed by Public
+                //this pattern match only urls that contains 3 segments, first of them must be 'Public'
+                routes.MapRoute(name:"",
+                                template:"Public/{controller=Home}/{action=Index}");
+
             } );
         }
     }
