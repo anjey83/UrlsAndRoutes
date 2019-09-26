@@ -27,7 +27,7 @@ namespace UrlsAndRoutes
             app.UseMvc(routes =>
             {
                 routes.MapRoute( name: "default",
-                                 template: "{controller}/{action=Index}" ); //provides both pettern and default behaviour withou action segment
+                                 template: "{controller=Home}/{action=Index}" ); //provides both pattern and default behaviour without any segment
             } );
         }
     }
