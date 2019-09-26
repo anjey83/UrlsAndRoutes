@@ -26,19 +26,16 @@ namespace UrlsAndRoutes
             app.UseStaticFiles();
             app.UseMvc(routes =>
             {
-                //this route will now match any URL, irrespective og the number of segments it contains or the value of any of those segments
-                //if URL contains additional segments, they are all assigned to the catchall variable
+                //simple constraint that limits the URLs that a route will match
+                //The int constraint only allows the URL pattern to match segments whose value can be parsed to an integer value
                 //example of work
-
-                //Segments              Example URL                         Maps To
-                //0                     /                                   controller = Home action = Index 
-                //1                     /Customer                           controller = Customer action = Index 
-                //2                     /Customer/List                      controller = Customer action = List 
-                //3                     /Customer/List/All                  controller = Customer action = List id = All 
-                //4                     /Customer/List/All/Delete           controller = Customer action = List id = All catchall = Delete 
-                //5                     /Customer/List/All/Delete/Perm      controller = Customer action = List id = All catchall = Delete/Perm
+                // Example URL                          Maps To
+                // /                                    controller = Home  action = Index  id = null 
+                // /Home/CustomVariable/Hello           No match—id segment cannot be parsed to an int value. 
+                // /Home/CustomVariable/1               controller = Home  action = CustomVariable  id = 1 
+                // /Home/CustomVariable/1/2             No match—too many segments
                 routes.MapRoute( name: "MyRoute", 
-                    template: "{controller=Home}/{action=Index}/{id?}/{*catchall}" );
+                    template: "{controller=Home}/{action=Index}/{id:int?}" );
             } );
         }
     }
