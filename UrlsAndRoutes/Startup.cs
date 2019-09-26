@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Routing.Constraints;
 using Microsoft.Extensions.DependencyInjection;
+using UrlsAndRoutes.Infrastructure;
 
 namespace UrlsAndRoutes
 {
@@ -26,20 +27,16 @@ namespace UrlsAndRoutes
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
-            app.UseMvc(routes =>
-            {
-                // range constraint, which restricts a route so that it matches URLs only when a segment value can be converted to an int and falls between specified values
-                routes.MapRoute( name: "MyRoute", 
-                    template: "{controller=Home}/{action=Index}/{id:alpha:minlength(6)?}" );
-                //or
-                //routes.MapRoute( name: "MyRoute", template: "{controller}/{action}/{id?}", defaults: new { controller = "Home", action = "Index" }, constraints: new
-                //{
-                //    id = new CompositeRouteConstraint( new IRouteConstraint[] {
-                //        new AlphaRouteConstraint(),
-                //        new MinLengthRouteConstraint(6)
-                //    } )
-                //} );
-            } );
+            app.UseMvc( 
+                routes => 
+                {
+                    //This route will match a URL only if the id segment is absent (such as /Customer/List) 
+                    //or if it matches one of the days of the week defined in the constraint class (such as /Customer/List/Fri).
+                    routes.MapRoute( name: "MyRoute", 
+                        template: "{controller}/{action}/{id?}", 
+                        defaults: new { controller = "Home", action = "Index" }, 
+                        constraints: new { id = new WeekDayConstraint() } );
+                } );
         }
     }
 }
