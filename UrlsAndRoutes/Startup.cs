@@ -28,6 +28,11 @@ namespace UrlsAndRoutes
             {
                 routes.MapRoute( name: "default",
                                  template: "{controller=Home}/{action=Index}" ); //provides both pattern and default behaviour without any segment
+                //By providing def vals for both the conntroller and action, the route will match urls that have zero, one or two segments
+                // /                controller=Home         action=Index
+                // /Customer        controller=Customer     action=Index
+                // /Customer/List   controller=Customer     action=List
+                // /Customer/List/All No match—too many segments
             } );
         }
     }
