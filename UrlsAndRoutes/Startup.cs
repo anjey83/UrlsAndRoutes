@@ -28,9 +28,15 @@ namespace UrlsAndRoutes
             {
                 //defines the standard controller and action variables and custom variable 'id'
                 //if there is not third segment the def value will be used
+                //example of work
+                //Segments          Example URL                             Maps To
+                //0                 /                                       controller = Home action = Index 
+                //1                 /Customer                               controller = Customer action = Index 
+                //2                 /Customer/List                          controller = Customer action = List 
+                //3                 /Customer/List/All                      controller = Customer action = List id = All 
+                //4                 /Customer/List/All/Delete               No match—too many segments
                 routes.MapRoute( name: "MyRoute", 
-                    template: "{controller=Home}/{action=Index}/{id=DefaultId}" );
-
+                    template: "{controller=Home}/{action=Index}/{id?}" );
             } );
         }
     }
