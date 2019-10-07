@@ -31,12 +31,12 @@ namespace UrlsAndRoutes
             app.UseStaticFiles();
             app.UseMvc( routes =>
             {
-                routes.MapRoute( name: "NewRoute",
-                    template: "App/Do{action}",
-                    defaults: new
-                    {
-                        controller = "Home"
-                    } );
+                //routes.MapRoute( name: "NewRoute",
+                //    template: "App/Do{action}",
+                //    defaults: new
+                //    {
+                //        controller = "Home"
+                //    } );
 
                 routes.MapRoute( name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}" );
